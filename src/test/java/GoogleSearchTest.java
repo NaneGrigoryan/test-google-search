@@ -16,7 +16,6 @@ public class GoogleSearchTest {
     @Test
     public void searchTest(){
 
-
     }
     @AfterMethod
     public void tearDown(){
