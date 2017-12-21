@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class BasePage {
     private WebDriver driver;
 
@@ -14,10 +16,16 @@ public class BasePage {
     public void visit(String url){
         driver.get(url);
     }
+
     public WebElement find(By locator){
         return driver.findElement(locator);
         //return find(By.cssSelector(cssSelector));
     }
+
+    public List<WebElement> findElements(By locator){
+        return driver.findElements(locator);
+    }
+
     public WebElement find(String cssSelector){
         return find(By.cssSelector(cssSelector));
     }
@@ -40,9 +48,7 @@ public class BasePage {
     public void type(WebElement element, String text){
         element.sendKeys(text);
     }
-    public void type(String cssSelector, String text){
-        type(find(cssSelector), text);
-    }
+
     public boolean isDisplayed(WebElement element){
         try {
             return element.isDisplayed();
@@ -55,6 +61,9 @@ public class BasePage {
     }
     public boolean isDisplayed(String cssSelector){
         return isDisplayed(find(cssSelector));
+    }
+    public void clickSearchButton(By locator){
+        click(locator);
     }
 
 }
