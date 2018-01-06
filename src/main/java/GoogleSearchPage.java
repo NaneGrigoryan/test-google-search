@@ -7,6 +7,7 @@ import java.util.List;
 public class GoogleSearchPage extends pageobjects.BasePage {
     private By searchInput = By.cssSelector("input#lst-ib");
     private By searchButton = By.cssSelector("input[name='btnK']");
+    private By result = By.cssSelector("div#resultStats");
 
     public GoogleSearchPage (WebDriver webdriver){
         super(webdriver);
@@ -21,6 +22,12 @@ public class GoogleSearchPage extends pageobjects.BasePage {
         webElement.clear();
         type(searchInput, text );
         clickSearchButton(searchButton);
+    }
+    public boolean isResultDisplayed(){
+        return isDisplayed(find(result), 10);
+    }
+    public WebElement getResult(){
+        return find(result);
     }
 
     public WebElement getFirstResult(){
