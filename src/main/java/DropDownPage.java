@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,12 +11,19 @@ public class DropDownPage extends pageobjects.BasePage {
         visit("http://the-internet.herokuapp.com/dropdown");
     }
 
-    public WebElement getDropDown() {
+    public WebElement getDropdown() {
         return find(By.id("dropdown"));
     }
 
     public List<WebElement> getDropDownOptions() {
-        return getDropDown().findElements(By.tagName("option"));
+        return getDropdown().findElements(By.tagName("option"));
+    }
+
+    public void forceAlert() {
+        ((JavascriptExecutor) driver).executeScript("alert('Hello! I am an alert box!!');");
+    }
+    public void closeAlert() {
+        driver.switchTo().alert().accept();
     }
 
     public void selectOption(String optionName) {

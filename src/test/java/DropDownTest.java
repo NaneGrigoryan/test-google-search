@@ -20,12 +20,17 @@ public class DropDownTest {
    /* @AfterMethod
     public void tearDown() {
         driver.close();
-    }*/
-
+    }
+*/
     @Test
     public void dropdownSelect() {
         dropdownPage.selectOption("Option 2");
         assertEquals(dropdownPage.getSelectedOption(), "Option 2");
     }
+    @Test
+    public void alert() {
+        dropdownPage.forceAlert();
+        dropdownPage.closeAlert();
 
+    }
 }
