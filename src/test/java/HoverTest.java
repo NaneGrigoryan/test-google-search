@@ -24,10 +24,11 @@ public class HoverTest {
 */
     @Test
     public void dropdownSelect() {
-        assertTrue(hoverPage.isHeaderNotDisplayed());
+        assertTrue(hoverPage.isHeaderNotDisplayed(), "Header was visible!");
         hoverPage.hoverAvatar();
-        assertTrue(hoverPage.isHeaderDisplayed());
-        assertTrue(hoverPage.getHeader().getText().contains("name: user1"));
-    }
+        assertTrue(hoverPage.isHeaderDisplayed(), "Header was not visible!");
+
+        assertTrue(hoverPage.getHeader().getText().contains("name: user1"), "Header text was not correct!");
+}
 
 }
