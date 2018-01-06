@@ -16,16 +16,15 @@ public class DynamicLoadTest {
         driver = new ChromeDriver();
         dynamicLoadPage = new DynamicLoadPage(driver);
     }
-
     @AfterMethod
     public void tearDown() {
         driver.close();
     }
-
-
     @Test
     public void dynamicLoad() {
         dynamicLoadPage.clickStart();
+        assertTrue(dynamicLoadPage.isLoadingDisplayed());
+        assertTrue(dynamicLoadPage.isLoadingNotDisplayed());
         assertTrue(dynamicLoadPage.isFinishDisplayed());
         assertEquals(dynamicLoadPage.getFinish().getText(),"Hello World!");
 

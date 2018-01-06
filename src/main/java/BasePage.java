@@ -7,7 +7,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class BasePage {
-    private WebDriver driver;
+    /*private WebDriver driver;*/
+    protected WebDriver driver;
 
     public BasePage(WebDriver webdriver){
         this.driver = webdriver;
@@ -64,7 +65,14 @@ public class BasePage {
         }
         return true;
     }
-
+    public boolean isNotDisplayed(WebElement element, Integer timeout) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeout);
+            wait.until(ExpectedConditions.invisibilityOf(element));
+            } catch (TimeoutException e) {
+                return false; }
+          return true;
+         }
     public boolean isDisplayed(By locator){
         return isDisplayed(find(locator));
     }
