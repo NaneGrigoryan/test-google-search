@@ -27,6 +27,7 @@ public class HoverTest {
         assertTrue(hoverPage.isHeaderNotDisplayed());
         hoverPage.hoverAvatar();
         assertTrue(hoverPage.isHeaderDisplayed());
+        assertTrue(hoverPage.getHeader().getText().contains("name: user1"));
     }
 
 }

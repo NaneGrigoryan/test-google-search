@@ -26,4 +26,8 @@ public class HoverPage extends pageobjects.BasePage {
     public boolean isHeaderNotDisplayed() {
         return isNotDisplayed(find(By.className("figcaption")), 5);
     }
+    public WebElement getHeader() {
+        hoverAvatar();
+        return find(By.className("figcaption"));
+        }
 }
