@@ -21,7 +21,7 @@ public class WindowsPage extends pageobjects.BasePage {
         driver.switchTo().window(getAllWindows()[index].toString());
     }
 
-    public void hoverElement(WebElement element){
+    /*public void hoverElement(WebElement element){
         Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
     }
@@ -42,5 +42,5 @@ public class WindowsPage extends pageobjects.BasePage {
     public WebElement getHeader() {
         hoverAvatar();
         return find(By.className("figcaption"));
-    }
+    }*/
 }
