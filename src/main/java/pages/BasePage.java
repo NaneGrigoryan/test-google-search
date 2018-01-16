@@ -1,21 +1,30 @@
-package pageobjects;
+package pages;
 
+import org.apache.commons.logging.Log;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class BasePage {
+    Logger log = Logger.getLogger(Log.class.getName());
     /*private WebDriver driver;*/
     protected WebDriver driver;
+
+    public static final String BASE_URL = System.getProperty("selenium.url", "http://the-internet.herokuapp.com");
 
     public BasePage(WebDriver webdriver){
         this.driver = webdriver;
     }
     public void visit(String url){
+        log.info("Visiting " + url);
         driver.get(url);
+        PageFactory.initElements(driver, this);
     }
+
 
     public WebElement find(By locator){
         return driver.findElement(locator);
