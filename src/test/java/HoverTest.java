@@ -1,7 +1,7 @@
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.HoverPage;
 
 import static org.testng.Assert.assertTrue;
 
@@ -11,9 +11,9 @@ public class HoverTest {
 
     @BeforeMethod
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
-        driver = new ChromeDriver();
-        hoverPage = new HoverPage(driver);
+       /* System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
+        driver = new ChromeDriver();*/
+        hoverPage = new HoverPage();
 
     }
 /*
