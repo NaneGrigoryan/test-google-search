@@ -1,16 +1,20 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class GoogleSearchPage extends pageobjects.BasePage {
+import static setup.DriverSetup.getDriver;
+
+public class GoogleSearchPage extends BasePage {
     private By searchInput = By.cssSelector("input#lst-ib");
     private By searchButton = By.cssSelector("input[name='btnK']");
     private By result = By.cssSelector("div#resultStats");
 
-    public GoogleSearchPage (WebDriver webdriver){
-        super(webdriver);
+    public GoogleSearchPage (){
+        super(getDriver());
         visit("https://www.google.com/");
     }
     public void typeSearchText(By locator, String text){
