@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class DriverSetup {
     private static WebDriver driver;
     public static String BROWSER =
-            System.getProperty("selenium.browser", "chrome");
+            System.getProperty("selenium.browser", "firefox");
 
     public static WebDriver getDriver() {
         if (driver == null) {
@@ -38,7 +38,7 @@ public class DriverSetup {
                 driver.close();
                 //driver.quit();
                 driver = null;
-            } else if (BROWSER.equals("firefox")){
+            } else if (BROWSER.equals("chrome")){
                 driver.close();
                 driver.quit();
                 driver = null;
