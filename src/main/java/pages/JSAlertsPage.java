@@ -1,9 +1,17 @@
+package pages;
+
 import org.openqa.selenium.WebDriver;
 
-public class JSAlertsPage extends pageobjects.BasePage {
-    public JSAlertsPage(WebDriver webDriver) {
-        super(webDriver);
-        visit("http://the-internet.herokuapp.com/javascript_alerts");
+import static setup.DriverSetup.getDriver;
+
+public class JSAlertsPage extends BasePage {
+    public JSAlertsPage() {
+        super(getDriver());
+       // visit("http://the-internet.herokuapp.com/javascript_alerts");
+        visit(getUrl());
+    }
+    public String getUrl() {
+        return BASE_URL + "/javascript_alerts";
     }
 
     public void clickLink() {

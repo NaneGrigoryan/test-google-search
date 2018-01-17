@@ -1,6 +1,7 @@
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.JSAlertsPage;
 
 public class JSAlertsTest {
     private ChromeDriver driver;
@@ -8,9 +9,9 @@ public class JSAlertsTest {
 
     @BeforeMethod
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
-        driver = new ChromeDriver();
-        jsalertsPage = new JSAlertsPage(driver);
+        /*System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
+        driver = new ChromeDriver();*/
+        jsalertsPage = new JSAlertsPage();
     }
 
     /*@AfterMethod
