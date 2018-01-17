@@ -1,12 +1,17 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+package pages;
 
-public class WindowsPage extends pageobjects.BasePage {
-    public WindowsPage(WebDriver webDriver) {
-        super(webDriver);
-        visit("http://the-internet.herokuapp.com/windows");
+import org.openqa.selenium.WebDriver;
+
+import static setup.DriverSetup.getDriver;
+
+public class WindowsPage extends BasePage {
+    public WindowsPage() {
+        super(getDriver());
+        //visit("http://the-internet.herokuapp.com/windows");
+        visit(getUrl());
+    }
+    public String getUrl() {
+        return BASE_URL + "/window";
     }
 
     public void clickLink() {
@@ -25,12 +30,9 @@ public class WindowsPage extends pageobjects.BasePage {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
     }
-
     public void hoverAvatar() {
         hoverElement(find(By.className("figure")));
-
     }
-
     public boolean isHeaderDisplayed() {
         return isDisplayed(By.className("figcaption"));
     }
@@ -38,7 +40,6 @@ public class WindowsPage extends pageobjects.BasePage {
     public boolean isHeaderNotDisplayed() {
         return isNotDisplayed(find(By.className("figcaption")), 5);
     }
-
     public WebElement getHeader() {
         hoverAvatar();
         return find(By.className("figcaption"));
