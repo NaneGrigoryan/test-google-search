@@ -6,13 +6,13 @@ import pages.GoogleSearchPage;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class GoogleSearchTest {
+public class GoogleSearchTest extends BaseTest {
     private GoogleSearchPage googleSearchPage;
-    private ChromeDriver driver;
+   // private ChromeDriver driver;
 
     @BeforeMethod
     public void setUp(){
-       /* System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
+        /*System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
         driver = new ChromeDriver();*/
         googleSearchPage = new GoogleSearchPage();
     }
