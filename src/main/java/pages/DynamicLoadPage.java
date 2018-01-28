@@ -1,10 +1,8 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import setup.WaitHelper;
 
 import static setup.DriverSetup.getDriver;
 
@@ -26,23 +24,52 @@ public class DynamicLoadPage extends BasePage {
 
     public DynamicLoadPage( ) {
         super(getDriver());
-        visit("http://the-internet.herokuapp.com/dynamic_loading/1");
+        visit(getUrl());
         //PageFactory.initElements(driver, this);//DynamicLoadPage.class petq a ashxati this-i nman,
         // tanenq basepage, vorpeszi amen angam chgrenq bolor pagerum
         // dynamicLoadPage classic verevum find arac elementner@ init a anum
     }
 
-    public void clickStart(){
+    @Override
+    public String getUrl() {
+        return BASE_URL + "/dynamic_loading/1";
+    }
 
+    public void clickStart(){
         click(startButton);
     }
-    public boolean isFinishDisplayed(){ return isDisplayed(finishText, 10); }
-    public boolean isLoadingDisplayed() { return isDisplayed (loadingText, 10); }
-    public boolean isLoadingNotDisplayed() { return isNotDisplayed(loadingText, 10);
+
+    public boolean isFinishDisplayed(){
+       try{
+           WaitHelper.getWait().waitForElementToBeVisible(finishText);
+           return true;
+       } catch (Error e){
+           return false;
+       }
+    }
+
+    public boolean isLoadingDisplayed() {
+        try {
+            WaitHelper.getWait().waitForElementToBeVisible(loadingText);
+            return true;
+        } catch (Error e){
+            return false;
+
         }
+    }
+
+    public boolean isLoadingNotDisplayed() {
+        try {
+            WaitHelper.getWait().waitForElementNotVisible(loadingText);
+            return true;
+        } catch (Error e){
+            return false;
+
+        }
+    }
+
     public WebElement getFinish(){
         return finishText;
     }
-
 
 }
