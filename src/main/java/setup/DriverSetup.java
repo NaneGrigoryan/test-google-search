@@ -19,98 +19,53 @@ public class DriverSetup {
     private static WebDriver driver;
     public static String BROWSER =
             System.getProperty("selenium.browser", "chrome");
-    private static ThreadLocal<WebDriver> driverThread; //+ for parallel run
-    private static List<WebDriver> webDriverPool = Collections.synchronizedList(new ArrayList<WebDriver>()); //+ for parallel run
+    private static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 
-     // public static WebDriver getDriver() {
-      public static WebDriver initDriver() {
+    public static void initDriver() {
         if (driver == null) {
             switch (BROWSER) {
                 case "chrome":
-                    String chromeDriverLocation = System.getProperty("selenium.chromedriver", "C:\\dev\\chromedriver.exe");
+                    String chromeDriverLocation = System.getProperty("selenium.chromedriver",
+                            "C:\\dev\\chromedriver.exe");
                     System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
-                   /* driver = new ChromeDriver();
-                    driver.manage().window().maximize();*/
-                   /*try {
-                       driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),new DesiredCapabilities());
-                   } catch (MalformedURLException e) {
-                       e.printStackTrace();
-                   }*/
                     if (Boolean.valueOf(System.getProperty("selenium.remote", "false"))) {
-                        return initRemoteDriver(DesiredCapabilities.chrome());
+                        initRemoteDriver(DesiredCapabilities.chrome());
                     } else {
-                        driverThread = new ThreadLocal<WebDriver>() {
-                            @Override
-                            protected WebDriver initialValue() {
-                                WebDriver webDriver = null;
-                                webDriver = new ChromeDriver();
-                                webDriverPool.add(webDriver);
-                                return webDriver;
-                            }
-                        };
-
+                        driverThread.set(new ChromeDriver());
                     }
-
                     break;
-
                 case "firefox":
-                    String firefoxDriverLocation = System.getProperty("selenium.geckodriver", "C:\\dev\\geckodriver.exe");
+                    String firefoxDriverLocation = System.getProperty("selenium.geckodriver",
+                            "/Users/sargis/dev/selenium-drivers/geckodriver");
                     System.setProperty("webdriver.gecko.driver", firefoxDriverLocation);
                     driver = new FirefoxDriver();
-                    driver.manage().window().maximize();
-
+                    driver.manage().window().fullscreen();
                     break;
             }
         }
-        return driver;
     }
-    public static WebDriver initRemoteDriver(DesiredCapabilities capability) {
-        driverThread = new ThreadLocal<WebDriver>() {
-            @Override
-            protected WebDriver initialValue() {
-                WebDriver webDriver = null;
-                try {
-                    capability.setCapability(CapabilityType.PLATFORM_NAME, "Windows 10");
-                    webDriver = new RemoteWebDriver(new URL("http://nanegrigoryan:6ca6187e-bfec-4d3f-9259-c5090a4e8bb4@ondemand.saucelabs.com:80/wd/hub"), capability);
-                    webDriverPool.add(webDriver);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                return webDriver;
-            }
-        };
-        return null;
+
+    public static void initRemoteDriver(DesiredCapabilities capability) {
+        capability.setCapability(CapabilityType.PLATFORM_NAME, "Linux");
+        WebDriver webDriver = null;
+        try {
+            webDriver = new RemoteWebDriver(new URL("http://nanegrigoryan:6ca6187e-bfec-4d3f-9259-c5090a4e8bb4@ondemand.saucelabs.com:80/wd/hub"), capability);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        driverThread.set(webDriver);
     }
 
     public static WebDriver getDriver() {
-        if (driverThread == null){
-            initDriver();
-        }
         return driverThread.get();
     }
 
-    public static void quitDriver() {
-      /*  webDriverPool.stream().filter(driver -> driver != null).forEach(driver -> {
-            if (((RemoteWebDriver) driver).getSessionId() != null) {
-                driver.close();
-            }*/
-        getDriver().close();
 
-       // });
+    public static void quitDriver() {
+        getDriver().close();
+        getDriver().quit();
+
     }
 }
 
-    /*public static void quitDriver() {
-        if (driver != null) {
-            if(BROWSER.equals("firefox")){
-                driver.close();
-                //driver.quit();
-                driver = null;
-            } else if (BROWSER.equals("chrome")){
-                driver.close();
-                driver.quit();
-                driver = null;
-            }
-
-        }
-    }*/
