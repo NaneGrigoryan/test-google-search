@@ -8,6 +8,7 @@ import java.util.List;
 
 import static setup.DriverSetup.getDriver;
 
+
 public class GoogleSearchPage extends BasePage {
     private By searchInput = By.cssSelector("input#lst-ib");
     private By searchButton = By.cssSelector("input[name='btnK']");
@@ -15,8 +16,9 @@ public class GoogleSearchPage extends BasePage {
 
     public GoogleSearchPage (){
         super(getDriver());
-        visit("https://www.google.com/");
+        visit(getUrl());
     }
+
     public void typeSearchText(By locator, String text){
         type(searchInput, text);
     }
@@ -34,9 +36,14 @@ public class GoogleSearchPage extends BasePage {
         return find(result);
     }
 
+
     public WebElement getFirstResult(){
         List<WebElement> elements = findElements(By.cssSelector(".rc .r"));
         return elements.get(0);
     }
 
+    @Override
+    public String getUrl() {
+        return "https://www.google.am/?gws_rd=cr&dcr=0&ei=SuxtWsn0N8aesgHO4Z_IAw";
+    }
 }

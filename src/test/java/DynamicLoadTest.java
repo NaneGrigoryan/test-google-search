@@ -7,19 +7,15 @@ import pages.DynamicLoadPage;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class DynamicLoadTest {
-    private ChromeDriver driver;
+public class DynamicLoadTest extends BaseTest{
+   // private ChromeDriver driver;
     private DynamicLoadPage dynamicLoadPage;
 
     @BeforeMethod
     public void setUp() {
-      /*  System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
+        /*System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
         driver = new ChromeDriver();*/
         dynamicLoadPage = new DynamicLoadPage();
-    }
-    @AfterMethod
-    public void tearDown() {
-        driver.close();
     }
     @Test
     public void dynamicLoad() {
